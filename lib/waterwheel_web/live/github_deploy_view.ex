@@ -3,48 +3,41 @@ defmodule WaterwheelWeb.GithubDeployView do
 
   def render(assigns) do
     ~L"""
-    <div class="">
-      <div>
-        <div>
-          <button phx-click="github_deploy">Deploy to GitHub</button>
-        </div>
-        Status: <%= @deploy_step %>
-      </div>
+    <div>
+      <%= for val <- @values do %>
+        <ul>
+          <li>Event Type: <strong><%= val.type %></strong></li>
+          <li>Author: <strong><%= val.author %></strong></li>
+          <li>Dataset ID: <strong><%= val.dataset_id %></strong></li>
+        </ul>
+        <hr>
+      <% end %>
     </div>
     """
   end
 
   def mount(_session, socket) do
-    {:ok, assign(socket, deploy_step: "Ready!")}
+    WaterwheelWeb.Endpoint.subscribe("events")
+
+    {:ok, assign(socket, values: [], stuff: ["1", "2", "3", "4"])}
   end
 
-  def handle_event("github_deploy", _value, socket) do
-    Process.sleep(100)
-    send(self(), :create_org)
-    {:noreply, assign(socket, deploy_step: "Starting deploy...")}
+  def handle_info(%{payload: event}, socket) do
+    IO.inspect(event.type, label: "Event type")
+    IO.inspect(socket.assigns.values, label: "Wat")
+
+    vals = [get_useful_info(event) | socket.assigns.values]
+
+    {:noreply, assign(socket, values: vals)}
   end
 
-  def handle_info(:create_org, socket) do
-    {:ok, org} = {:ok, "TheOrg"}
-    Process.sleep(100)
-    send(self(), {:create_repo, org})
-    {:noreply, assign(socket, deploy_step: "Creating GitHub org...")}
-  end
+  defp get_useful_info(event) do
+    IO.inspect(event)
 
-  def handle_info({:create_repo, org}, socket) do
-    {:ok, repo} = {:ok, "TheRepo"}
-    Process.sleep(100)
-    send(self(), {:push_contents, repo})
-    {:noreply, assign(socket, deploy_step: "Creating GitHub repo...")}
-  end
-
-  def handle_info({:push_contents, repo}, socket) do
-    Process.sleep(100)
-    send(self(), :done)
-    {:noreply, assign(socket, deploy_step: "Pushing to repo...")}
-  end
-
-  def handle_info(:done, socket) do
-    {:noreply, assign(socket, deploy_step: "Done!")}
+    %{
+      type: event.type,
+      author: event.author,
+      dataset_id: event.data.id
+    }
   end
 end

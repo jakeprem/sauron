@@ -1,0 +1,23 @@
+service:
+  name: waterwheel
+  port: 80
+  auth_string: ""
+
+image:
+  name: jakeprem/scos-waterwheel
+  tag: 4
+
+monitoring:
+  targetPort: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+redis:
+  host: redis.external-services
+
+kafka:
+  brokers: streaming-service-kafka-bootstrap.streaming-prime:9092

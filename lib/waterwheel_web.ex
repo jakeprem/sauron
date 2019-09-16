@@ -41,7 +41,6 @@ defmodule WaterwheelWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-
       import WaterwheelWeb.ErrorHelpers
       import WaterwheelWeb.Gettext
       alias WaterwheelWeb.Router.Helpers, as: Routes
