@@ -12,7 +12,10 @@ config :waterwheel, WaterwheelWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "I/nxrEJGCOEzanrrcscVFsp3q95ZTxbvgYbCo4MLNHtnojMfPiM8xxmGwYnrI4ak",
   render_errors: [view: WaterwheelWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Waterwheel.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Waterwheel.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [
+    signing_salt: "THIS SHOULD BE INJECTED"
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -20,7 +23,8 @@ config :logger, :console,
   metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
+config :phoenix, json_library: Jason,
+  template_engines: [leex: Phoenix.LiveView.Engine]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
