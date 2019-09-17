@@ -14,6 +14,7 @@ RUN mix local.hex --force && \
     mix test
 
 RUN cd assets/ && \
+    npm install && \
     npm run deploy && \
     cd - && \
     mix do compile, phx.digest

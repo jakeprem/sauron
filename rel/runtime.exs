@@ -24,7 +24,7 @@ config :waterwheel, :brook,
       ]
     ]
   ],
-  handlers: [Waterwheel.DatasetHandler],
+  handlers: [Waterwheel.EventHandler],
   storage: [
     module: Brook.Storage.Ets,
     init_arg: [

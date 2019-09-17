@@ -23,7 +23,7 @@ config :waterwheel, :brook,
       ]
     ]
   ],
-  handlers: [Waterwheel.DatasetHandler],
+  handlers: [Waterwheel.EventHandler],
   storage: [
     module: Brook.Storage.Redis,
     init_arg: [
