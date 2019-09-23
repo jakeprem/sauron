@@ -30,8 +30,6 @@ defmodule SauronWeb.EventView do
   end
 
   defp get_useful_info(event) do
-    IO.inspect(event)
-
     %{
       type: event.type,
       author: event.author,
