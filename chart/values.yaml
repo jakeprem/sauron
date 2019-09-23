@@ -2,7 +2,7 @@ replicatCount: 1
 
 image:
   repository: jakeprem/scos-sauron
-  tag: dev
+  tag: latest
   pullPolicy: Always
 
 monitoring:
