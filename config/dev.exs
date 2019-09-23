@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :waterwheel, WaterwheelWeb.Endpoint,
+config :sauron, SauronWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -23,35 +23,35 @@ host =
 
 endpoints = [{String.to_atom(host), 9092}]
 
-config :waterwheel, :brook,
+config :sauron, :brook,
   driver: [
     module: Brook.Driver.Kafka,
     init_arg: [
       endpoints: endpoints,
       topic: "event-stream",
-      group: "waterwheel-events",
+      group: "sauron-events",
       config: [
         begin_offset: :earliest
       ]
     ]
   ],
-  handlers: [Waterwheel.EventHandler],
+  handlers: [Sauron.EventHandler],
   storage: [
     module: Brook.Storage.Redis,
     init_arg: [
       redix_args: [host: host],
-      namespace: "waterwheel:view"
+      namespace: "sauron:view"
     ]
   ]
 
-config :waterwheel, WaterwheelWeb.Endpoint,
+config :sauron, SauronWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/waterwheel_web/views/.*(ex)$},
-      ~r{lib/waterwheel_web/templates/.*(eex)$},
-      ~r{lib/waterwheel_web/live/.*(ex)$}
+      ~r{lib/sauron_web/views/.*(ex)$},
+      ~r{lib/sauron_web/templates/.*(eex)$},
+      ~r{lib/sauron_web/live/.*(ex)$}
     ]
   ]
 

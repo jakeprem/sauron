@@ -1,5 +1,5 @@
-defmodule WaterwheelWeb.PageControllerTest do
-  use WaterwheelWeb.ConnCase
+defmodule SauronWeb.PageControllerTest do
+  use SauronWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     # conn = get(conn, "/")

@@ -1,4 +1,4 @@
-defmodule WaterwheelWeb.ErrorHelpers do
+defmodule SauronWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -36,9 +36,9 @@ defmodule WaterwheelWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(WaterwheelWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(SauronWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(WaterwheelWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(SauronWeb.Gettext, "errors", msg, opts)
     end
   end
 end

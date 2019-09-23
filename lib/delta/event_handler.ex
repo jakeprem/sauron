@@ -1,10 +1,10 @@
-defmodule Waterwheel.EventHandler do
+defmodule Sauron.EventHandler do
   use Brook.Event.Handler
 
   require Logger
 
   def handle_event(%Brook.Event{} = event) do
-    WaterwheelWeb.Endpoint.broadcast!(
+    SauronWeb.Endpoint.broadcast!(
       "events",
       "new_event",
       event

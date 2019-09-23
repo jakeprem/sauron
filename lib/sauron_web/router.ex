@@ -1,5 +1,5 @@
-defmodule WaterwheelWeb.Router do
-  use WaterwheelWeb, :router
+defmodule SauronWeb.Router do
+  use SauronWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -15,14 +15,14 @@ defmodule WaterwheelWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", WaterwheelWeb do
+  scope "/", SauronWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", WaterwheelWeb do
+  # scope "/api", SauronWeb do
   #   pipe_through :api
   # end
 end

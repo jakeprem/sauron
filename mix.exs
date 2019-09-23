@@ -1,9 +1,9 @@
-defmodule Waterwheel.MixProject do
+defmodule Sauron.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :waterwheel,
+      app: :sauron,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule Waterwheel.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Waterwheel.Application, []},
+      mod: {Sauron.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

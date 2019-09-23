@@ -12,24 +12,24 @@ if kafka_brokers do
     |> Enum.map(fn entry -> String.split(entry, ":") end)
     |> Enum.map(fn [host, port] -> {String.to_atom(host), String.to_integer(port)} end)
 
-config :waterwheel, :brook,
+config :sauron, :brook,
   driver: [
     module: Brook.Driver.Kafka,
     init_arg: [
       endpoints: endpoints,
       topic: "event-stream",
-      group: "waterwheel-events",
+      group: "sauron-events",
       config: [
         begin_offset: :earliest
       ]
     ]
   ],
-  handlers: [Waterwheel.EventHandler],
+  handlers: [Sauron.EventHandler],
   storage: [
     module: Brook.Storage.Ets,
     init_arg: [
       # redix_args: [host: redis_host],
-      namespace: "waterwheel:view"
+      namespace: "sauron:view"
     ]
   ]
 end

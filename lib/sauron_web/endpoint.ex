@@ -1,7 +1,7 @@
-defmodule WaterwheelWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :waterwheel
+defmodule SauronWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :sauron
 
-  socket "/socket", WaterwheelWeb.UserSocket,
+  socket "/socket", SauronWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -13,7 +13,7 @@ defmodule WaterwheelWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :waterwheel,
+    from: :sauron,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -41,8 +41,8 @@ defmodule WaterwheelWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_waterwheel_key",
+    key: "_sauron_key",
     signing_salt: "lzftceoo"
 
-  plug WaterwheelWeb.Router
+  plug SauronWeb.Router
 end

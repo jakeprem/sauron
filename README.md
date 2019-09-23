@@ -1,4 +1,4 @@
-# Waterwheel
+# Sauron
 
 To start your Phoenix server:
 

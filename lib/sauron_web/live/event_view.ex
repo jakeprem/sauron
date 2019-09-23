@@ -1,4 +1,4 @@
-defmodule WaterwheelWeb.GithubDeployView do
+defmodule SauronWeb.EventView do
   use Phoenix.LiveView
 
   def render(assigns) do
@@ -17,9 +17,9 @@ defmodule WaterwheelWeb.GithubDeployView do
   end
 
   def mount(_session, socket) do
-    WaterwheelWeb.Endpoint.subscribe("events")
+    SauronWeb.Endpoint.subscribe("events")
 
-    {:ok, assign(socket, values: [], stuff: ["1", "2", "3", "4"])}
+    {:ok, assign(socket, values: [])}
   end
 
   def handle_info(%{payload: event}, socket) do

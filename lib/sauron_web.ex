@@ -1,12 +1,12 @@
-defmodule WaterwheelWeb do
+defmodule SauronWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use WaterwheelWeb, :controller
-      use WaterwheelWeb, :view
+      use SauronWeb, :controller
+      use SauronWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,19 +19,19 @@ defmodule WaterwheelWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: WaterwheelWeb
+      use Phoenix.Controller, namespace: SauronWeb
 
       import Plug.Conn
-      import WaterwheelWeb.Gettext
-      alias WaterwheelWeb.Router.Helpers, as: Routes
+      import SauronWeb.Gettext
+      alias SauronWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/waterwheel_web/templates",
-        namespace: WaterwheelWeb
+        root: "lib/sauron_web/templates",
+        namespace: SauronWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -41,9 +41,9 @@ defmodule WaterwheelWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import WaterwheelWeb.ErrorHelpers
-      import WaterwheelWeb.Gettext
-      alias WaterwheelWeb.Router.Helpers, as: Routes
+      import SauronWeb.ErrorHelpers
+      import SauronWeb.Gettext
+      alias SauronWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -59,7 +59,7 @@ defmodule WaterwheelWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import WaterwheelWeb.Gettext
+      import SauronWeb.Gettext
     end
   end
 

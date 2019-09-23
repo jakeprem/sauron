@@ -1,5 +1,5 @@
-defmodule WaterwheelWeb.ErrorView do
-  use WaterwheelWeb, :view
+defmodule SauronWeb.ErrorView do
+  use SauronWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

@@ -8,11 +8,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :waterwheel, WaterwheelWeb.Endpoint,
+config :sauron, SauronWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "I/nxrEJGCOEzanrrcscVFsp3q95ZTxbvgYbCo4MLNHtnojMfPiM8xxmGwYnrI4ak",
-  render_errors: [view: WaterwheelWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Waterwheel.PubSub, adapter: Phoenix.PubSub.PG2],
+  render_errors: [view: SauronWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Sauron.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [
     signing_salt: "THIS SHOULD BE INJECTED"
   ]

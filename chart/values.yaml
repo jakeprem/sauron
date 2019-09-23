@@ -1,20 +1,36 @@
-service:
-  name: waterwheel
-  port: 80
-  auth_string: ""
+replicatCount: 1
 
 image:
-  name: jakeprem/scos-waterwheel
-  tag: 5
+  repository: jakeprem/scos-sauron
+  tag: dev
+  pullPolicy: Always
 
 monitoring:
   targetPort: 80
 
-nodeSelector: {}
+nameOverride: ""
+fullnameOverride: ""
 
-tolerations: []
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
 
-affinity: {}
+ingress:
+  enabled: false
+  scheme: ""
+  subnets: ""
+  securityGroups: ""
+  certificateARN: ""
+  dnsZone: "localhost"
+
+resources:
+  limits:
+    memory: 256Mi
+    cpu: 150m
+  requests:
+    memory: 256Mi
+    cpu: 50m
 
 redis:
   host: redis.external-services

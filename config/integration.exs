@@ -11,23 +11,23 @@ endpoints = [{String.to_atom(host), 9092}]
 config :logger,
   level: :info
 
-config :waterwheel, :brook,
+config :sauron, :brook,
   driver: [
     module: Brook.Driver.Kafka,
     init_arg: [
       endpoints: endpoints,
       topic: "event-stream",
-      group: "waterwheel-events",
+      group: "sauron-events",
       config: [
         begin_offset: :earliest
       ]
     ]
   ],
-  handlers: [Waterwheel.EventHandler],
+  handlers: [Sauron.EventHandler],
   storage: [
     module: Brook.Storage.Redis,
     init_arg: [
       redix_args: [host: host],
-      namespace: "waterwheel:view"
+      namespace: "sauron:view"
     ]
   ]

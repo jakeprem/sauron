@@ -1,27 +1,33 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: waterwheel
-  namespace: {{ .Release.Namespace }}
+  name: {{ .Chart.Name }}
   labels:
-    app: waterwheel
+    app.kubernetes.io/name: {{ include "helm.name" . }}
+    helm.sh/chart: {{ include "helm.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: waterwheel
+      app.kubernetes.io/name: {{ include "helm.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: waterwheel
+        app.kubernetes.io/name: {{ include "helm.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-      - name: waterwheel
-        image: {{ .Values.image.name }}:{{ .Values.image.tag }}
-        imagePullPolicy: IfNotPresent
-        resources:
-{{ toYaml .Values.resources | indent 10 }}
-        env:
+        - name: {{ .Chart.Name }}
+          resources:
+{{ toYaml .Values.resources | indent 12 -}}
+          ports:
+            - containerPort: 80
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
           - name: REDIS_HOST
             value: {{ .Values.redis.host }}
           - name: KAFKA_BROKERS

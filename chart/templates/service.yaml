@@ -1,15 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: waterwheel
-  namespace: {{ .Release.Namespace }}
+  name: {{ .Chart.Name }}
   labels:
-    app: waterwheel
+    app.kubernetes.io/name: {{ include "helm.fullname" . }}
+  annotations:
+    prometheus.io/port:  "{{ .Values.monitoring.targetPort }}"
+    prometheus.io/scrape: "false"
 spec:
   selector:
-    app: waterwheel
+    app.kubernetes.io/name: {{ include "helm.fullname" . }}
   ports:
-  - protocol: TCP
+  - name: http
     port: 80
-    targetPort: 80
+    protocol: TCP
   type: NodePort
