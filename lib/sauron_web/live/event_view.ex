@@ -9,6 +9,7 @@ defmodule SauronWeb.EventView do
           <li>Event Type: <strong><%= val.type %></strong></li>
           <li>Author: <strong><%= val.author %></strong></li>
           <li>Dataset ID: <strong><%= val.dataset_id %></strong></li>
+          <li>Time: <strong><%= val.time %></strong></li>
         </ul>
         <hr>
       <% end %>
@@ -23,9 +24,6 @@ defmodule SauronWeb.EventView do
   end
 
   def handle_info(%{payload: event}, socket) do
-    IO.inspect(event.type, label: "Event type")
-    IO.inspect(socket.assigns.values, label: "Wat")
-
     vals = [get_useful_info(event) | socket.assigns.values]
 
     {:noreply, assign(socket, values: vals)}
@@ -37,7 +35,8 @@ defmodule SauronWeb.EventView do
     %{
       type: event.type,
       author: event.author,
-      dataset_id: event.data.id
+      dataset_id: event.data.id,
+      time: event.create_ts
     }
   end
 end
