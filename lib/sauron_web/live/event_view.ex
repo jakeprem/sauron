@@ -9,6 +9,8 @@ defmodule SauronWeb.EventView do
           <li>Event Type: <strong><%= val.type %></strong></li>
           <li>Author: <strong><%= val.author %></strong></li>
           <li>Dataset ID: <strong><%= val.dataset_id %></strong></li>
+          <li>Organization: <strong><%= val.org_title %></strong></li>
+          <li>Data Title: <strong><%= val.data_title %></strong></li>
           <li>Time: <strong><%= val.time %></strong></li>
         </ul>
         <hr>
@@ -34,6 +36,8 @@ defmodule SauronWeb.EventView do
       type: event.type,
       author: event.author,
       dataset_id: event.data.id,
+      org_title: event.data.business.orgTitle,
+      data_title: event.data.business.dataTitle,
       time: event.create_ts
     }
   end
