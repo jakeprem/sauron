@@ -1,10 +1,15 @@
 defmodule SauronWeb.EventView do
   use Phoenix.LiveView
 
+  alias Sauron.EventAgent
+
   def render(assigns) do
     ~L"""
     <div>
-      <%= for val <- @values do %>
+      <form phx-change="filter">
+        <input type="text" phx-change="filter" name="filter-text">
+      </form>
+      <%= for val <- filter_values(@values, @filter) do %>
         <ul>
           <li>Event Type: <strong><%= val.type %></strong></li>
           <li>Author: <strong><%= val.author %></strong></li>
@@ -22,10 +27,18 @@ defmodule SauronWeb.EventView do
   def mount(_session, socket) do
     SauronWeb.Endpoint.subscribe("events")
 
-    {:ok, assign(socket, values: [])}
+    events = EventAgent.get_events() |> Enum.map(&get_useful_info/1)
+
+    {:ok, assign(socket, values: events, filter: "")}
+  end
+
+  def handle_event("filter", %{"filter-text" => filter_text}, socket) do
+    filter_text |> IO.inspect(label: "Filter event")
+    {:noreply, assign(socket, filter: filter_text)}
   end
 
   def handle_info(%{payload: event}, socket) do
+    IO.inspect(event, label: "EVENT VIEW HANDLE INFO")
     vals = [get_useful_info(event) | socket.assigns.values]
 
     {:noreply, assign(socket, values: vals)}
@@ -40,5 +53,9 @@ defmodule SauronWeb.EventView do
       data_title: event.data.business.dataTitle,
       time: event.create_ts
     }
+  end
+
+  defp filter_values(values, filter) do
+    Enum.filter(values, &String.contains?(inspect(&1), filter))
   end
 end

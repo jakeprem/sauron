@@ -3,6 +3,7 @@ defmodule SauronWeb.UserSocket do
 
   ## Channels
   # channel "room:*", SauronWeb.RoomChannel
+  channel "events", SauronWeb.EventChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

@@ -9,6 +9,7 @@ defmodule Sauron.Application do
     children =
       [
         SauronWeb.Endpoint,
+        Sauron.EventAgent,
         brook_def()
       ]
       |> List.flatten()
