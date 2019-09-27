@@ -6,7 +6,7 @@ defmodule SauronWeb.EventView do
   def render(assigns) do
     ~L"""
     <div>
-      <form action="#' phx-change="filter">
+      <form phx-change="filter">
         <input type="text" phx-change="filter" name="filter-text">
       </form>
       <%= for val <- filter_values(@values, @filter) do %>
