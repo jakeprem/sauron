@@ -112,10 +112,10 @@ defmodule SauronWeb.EventView do
 
   defp filter_values(values, filter, hide_streams, show_dataset, show_org) do
     values
-    |> Enum.filter(&String.contains?(inspect(&1), filter))
     |> Enum.reject(fn val -> hide_streams && val.is_stream end)
     |> Enum.reject(fn val -> !show_dataset && val.struct_type == SmartCity.Dataset end)
     |> Enum.reject(fn val -> !show_org && val.struct_type == SmartCity.Organization end)
+    |> Enum.filter(&String.contains?(inspect(&1), filter))
     |> Enum.take(5000)
   end
 end
