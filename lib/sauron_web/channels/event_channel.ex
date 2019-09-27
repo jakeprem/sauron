@@ -4,7 +4,6 @@ defmodule SauronWeb.EventChannel do
   alias Sauron.EventAgent
 
   def join("events", _message, socket) do
-
     {:ok, socket}
   end
 
