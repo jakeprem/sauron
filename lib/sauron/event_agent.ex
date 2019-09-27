@@ -16,4 +16,8 @@ defmodule Sauron.EventAgent do
       Enum.take([event | events], @max_events)
     end)
   end
+
+  def clear_events do
+    Agent.update(__MODULE__, fn _events -> [] end)
+  end
 end
