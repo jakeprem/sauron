@@ -7,6 +7,7 @@ defmodule Sauron.EventHandler do
 
   def handle_event(%Brook.Event{} = event) do
     EventAgent.add_event(event)
+
     SauronWeb.Endpoint.broadcast!(
       "events",
       "new_event",

@@ -5,7 +5,6 @@ defmodule Sauron.EventAgentTest do
 
   @max_events 100
 
-
   test "stores event" do
     {:ok, pid} = EventAgent.start_link(nil)
 

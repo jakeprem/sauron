@@ -33,12 +33,10 @@ defmodule SauronWeb.EventView do
   end
 
   def handle_event("filter", %{"filter-text" => filter_text}, socket) do
-    filter_text |> IO.inspect(label: "Filter event")
     {:noreply, assign(socket, filter: filter_text)}
   end
 
   def handle_info(%{payload: event}, socket) do
-    IO.inspect(event, label: "EVENT VIEW HANDLE INFO")
     vals = [get_useful_info(event) | socket.assigns.values]
 
     {:noreply, assign(socket, values: vals)}
