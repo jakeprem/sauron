@@ -1,7 +1,7 @@
 defmodule Sauron.EventAgent do
   use Agent
 
-  @max_events 100
+  @max_events 2500
 
   def start_link(_initial_value) do
     Agent.start_link(fn -> [] end, name: __MODULE__)

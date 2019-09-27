@@ -6,7 +6,7 @@ defmodule SauronWeb.EventView do
   def render(assigns) do
     ~L"""
     <div>
-      <form phx-change="filter">
+      <form action="#' phx-change="filter">
         <input type="text" phx-change="filter" name="filter-text">
       </form>
       <%= for val <- filter_values(@values, @filter) do %>
@@ -76,6 +76,8 @@ defmodule SauronWeb.EventView do
   end
 
   defp filter_values(values, filter) do
-    Enum.filter(values, &String.contains?(inspect(&1), filter))
+    values
+    |> Enum.filter(&String.contains?(inspect(&1), filter))
+    |> Enum.take(5000)
   end
 end
