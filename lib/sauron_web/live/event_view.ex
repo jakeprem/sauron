@@ -42,13 +42,35 @@ defmodule SauronWeb.EventView do
     {:noreply, assign(socket, values: vals)}
   end
 
-  defp get_useful_info(event) do
+  defp get_useful_info(%SmartCity.Dataset{} = event) do
     %{
       type: event.type,
       author: event.author,
       dataset_id: event.data.id,
       org_title: event.data.business.orgTitle,
       data_title: event.data.business.dataTitle,
+      time: event.create_ts
+    }
+  end
+
+  defp get_useful_info(%SmartCity.Organization{} = event) do
+    %{
+      type: event.type,
+      author: event.author,
+      dataset_id: event.data.id,
+      org_title: event.data.orgTitle,
+      data_title: "n/a",
+      time: event.create_ts
+    }
+  end
+
+  defp get_useful_info(event) do
+    %{
+      type: event.type,
+      author: event.author,
+      dataset_id: "???",
+      org_title: "???",
+      data_title: "???",
       time: event.create_ts
     }
   end
