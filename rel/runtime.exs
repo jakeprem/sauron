@@ -20,7 +20,7 @@ config :sauron, :brook,
       topic: "event-stream",
       group: "sauron-events",
       config: [
-        begin_offset: :earliest
+        begin_offset: :latest
       ]
     ]
   ],

@@ -3,7 +3,7 @@ defmodule Sauron.EventAgentTest do
 
   alias Sauron.EventAgent
 
-  @max_events 2500
+  @max_events 100
 
   test "stores event" do
     assert EventAgent.get_events() == []
