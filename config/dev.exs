@@ -24,6 +24,7 @@ host =
 endpoints = [{String.to_atom(host), 9092}]
 
 config :sauron, :brook,
+  instance: :sauron,
   driver: [
     module: Brook.Driver.Kafka,
     init_arg: [

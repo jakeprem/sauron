@@ -12,6 +12,7 @@ config :logger,
   level: :info
 
 config :sauron, :brook,
+  instance: :sauron,
   driver: [
     module: Brook.Driver.Kafka,
     init_arg: [

@@ -13,6 +13,7 @@ if kafka_brokers do
     |> Enum.map(fn [host, port] -> {String.to_atom(host), String.to_integer(port)} end)
 
 config :sauron, :brook,
+  instance: :sauron,
   driver: [
     module: Brook.Driver.Kafka,
     init_arg: [
