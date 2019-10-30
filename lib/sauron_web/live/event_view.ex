@@ -54,8 +54,6 @@ defmodule SauronWeb.EventView do
   end
 
   def handle_event("filter", %{"filter-text" => filter_text} = changes, socket) do
-    IO.inspect(changes, label: "Changes")
-
     {:noreply,
      assign(socket,
        filter: filter_text,
